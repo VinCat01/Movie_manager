@@ -1,9 +1,20 @@
-git import json
+import json
 import os
 
 
+
 def load_movies(path: str) -> list[dict]:
-    """Загрузка списка фильмов из JSON-файла."""
+    try:
+        with open(path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+            if isinstance(data, list):
+                return data
+            else:
+                return []
+    except FileNotFoundError:
+        return []
+    except (json.JSONDecodeError, IOError):
+        return []
     pass
 
 
