@@ -19,7 +19,8 @@ def load_movies(path: str) -> list[dict]:
 
 
 def save_movies(path: str, movies: list[dict]) -> None:
-    """Сохранение списка фильмов в JSON-файл."""
+    with open(path, 'w', encoding='utf-8') as file:
+        json.dump(movies, file, ensure_ascii=False, indent=2)
     pass
 
 
