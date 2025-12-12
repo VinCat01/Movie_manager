@@ -25,7 +25,19 @@ def save_movies(path: str, movies: list[dict]) -> None:
 
 
 def add_movie(movies: list[dict], title: str, year: int) -> list[dict]:
-    """Добавление нового фильма в список."""
+    updated_movies = movies.copy()
+    if updated_movies:
+        max_id = max(movie.get('id', 0) for movie in updated_movies)
+    else:
+        max_id = 0
+    new_movie = {
+        "id": max_id + 1,
+        "title": title,
+        "year": year,
+        "watched": False
+    }
+    updated_movies.append(new_movie)
+    return updated_movies
     pass
 
 
