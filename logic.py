@@ -15,13 +15,13 @@ def load_movies(path: str) -> list[dict]:
         return []
     except (json.JSONDecodeError, IOError):
         return []
-    pass
+
 
 
 def save_movies(path: str, movies: list[dict]) -> None:
     with open(path, 'w', encoding='utf-8') as file:
         json.dump(movies, file, ensure_ascii=False, indent=2)
-    pass
+
 
 
 def add_movie(movies: list[dict], title: str, year: int) -> list[dict]:
@@ -38,12 +38,18 @@ def add_movie(movies: list[dict], title: str, year: int) -> list[dict]:
     }
     updated_movies.append(new_movie)
     return updated_movies
-    pass
+
 
 
 def mark_watched(movies: list[dict], movie_id: int) -> list[dict]:
-    """Отметить фильм как просмотренный."""
-    pass
+    updated_movies = movies.copy()
+    for movie in updated_movies:
+        if movie.get('id') == movie_id:
+            movie['watched'] = True
+            break
+
+    return updated_movies
+
 
 
 def find_by_year(movies: list[dict], year: int) -> list[dict]:
